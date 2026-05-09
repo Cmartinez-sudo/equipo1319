@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="EQUIPO 1319 — Pozos petroleros, sistemas eléctricos y remodelación residencial y comercial. Ingeniería que mueve al mundo." />
-<title>EQUIPO 1319 · Ingeniería · Pozos · Sistemas Eléctricos · Remodelación</title>
+<meta name="description" content="EQUIPO 1319 — Ingeniería civil, eléctrica y remodelación. Caracas, Venezuela. 20+ años ejecutando obras para clientes corporativos." />
+<title>EQUIPO 1319 · Ingeniería Civil · Sistemas Eléctricos · Remodelación · Caracas</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
@@ -41,27 +41,28 @@ button, input, select, textarea { font: inherit; color: inherit; }
   --rule-2:    rgba(232,232,232,0.07);
 }
 
-/* ─────────────────────── BLUEPRINT GRID OVERLAY ─────────────────────── */
-.blueprint {
-  position: absolute; inset: 0; pointer-events: none;
-  background-image:
-    linear-gradient(0deg,   rgba(255,106,0,0.05) 1px, transparent 1px),
-    linear-gradient(90deg,  rgba(255,106,0,0.05) 1px, transparent 1px),
-    linear-gradient(0deg,   rgba(255,106,0,0.10) 1px, transparent 1px),
-    linear-gradient(90deg,  rgba(255,106,0,0.10) 1px, transparent 1px);
-  background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px;
-  z-index: 2;
+/* ─────────────────────── #8 BLUEPRINT DOT GRID OVERLAY (CSS only) ─────────────────────── */
+.dot-grid {
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background-image: radial-gradient(circle, rgba(255,106,0,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
-.blueprint.dark {
+.dot-grid.dense {
   background-image:
-    linear-gradient(0deg,   rgba(232,232,232,0.04) 1px, transparent 1px),
-    linear-gradient(90deg,  rgba(232,232,232,0.04) 1px, transparent 1px),
-    linear-gradient(0deg,   rgba(255,106,0,0.08)   1px, transparent 1px),
-    linear-gradient(90deg,  rgba(255,106,0,0.08)   1px, transparent 1px);
-  background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px;
+    radial-gradient(circle, rgba(255,106,0,0.04) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,106,0,0.10) 1px, transparent 1px);
+  background-size: 16px 16px, 96px 96px;
 }
 
-/* ─────────────────────── CUSTOM CURSOR ─────────────────────── */
+/* ─────────────────────── #9 TOPOGRAPHIC CONTOUR LINE TEXTURE ─────────────────────── */
+.topo-texture {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    repeating-linear-gradient(135deg, rgba(232,232,232,0.04) 0px, rgba(232,232,232,0.04) 1px, transparent 1px, transparent 14px),
+    repeating-linear-gradient(45deg,  rgba(255,106,0,0.025) 0px, rgba(255,106,0,0.025) 1px, transparent 1px, transparent 36px);
+}
+
+/* ─────────────────────── #12 CUSTOM CURSOR ─────────────────────── */
 .cursor-ring, .cursor-dot {
   position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
   border-radius: 50%; will-change: transform;
@@ -91,35 +92,48 @@ button, input, select, textarea { font: inherit; color: inherit; }
   background: var(--orange); z-index: 200;
 }
 
-/* ─────────────────────── NAV ─────────────────────── */
+/* ─────────────────────── #6 FLOATING ISLAND NAV ─────────────────────── */
 .nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 22px 36px;
+  position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 100;
+  display: flex; align-items: center; gap: 32px;
+  padding: 12px 16px 12px 22px;
   font-family: 'IBM Plex Mono', monospace; font-size: 11px;
   letter-spacing: 0.18em; text-transform: uppercase; color: var(--white);
-  background: linear-gradient(180deg, rgba(26,26,26,0.85) 0%, transparent 100%);
-  backdrop-filter: blur(6px);
+  background: rgba(26,26,26,0.55);
+  border: 1px solid var(--rule-2);
+  border-radius: 16px;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  transition: background .25s ease, border-color .25s ease;
+  max-width: calc(100vw - 32px);
 }
-.nav.scrolled { background: rgba(26,26,26,0.95); border-bottom: 1px solid var(--rule-2); }
+.nav.scrolled {
+  background: rgba(26,26,26,0.92);
+  border-color: var(--rule);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
 .nav .logo {
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
-  font-size: 22px; letter-spacing: 0.12em;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 20px; letter-spacing: 0.10em;
   display: flex; align-items: center; gap: 10px;
 }
 .nav .logo .bar { display: inline-block; width: 22px; height: 4px; background: var(--orange); }
 .nav .logo b   { color: var(--white); }
 .nav .logo b em { font-style: normal; color: var(--orange); }
-.nav ul { display: flex; gap: 28px; list-style: none; }
-.nav ul a { opacity: 0.85; transition: color .25s ease, opacity .25s ease; }
+.nav ul { display: flex; gap: 22px; list-style: none; }
+.nav ul a { display: inline-flex; flex-direction: column; line-height: 1.1; opacity: 0.85; transition: color .2s ease, opacity .2s ease; }
+.nav ul a small { font-size: 8.5px; opacity: 0.6; letter-spacing: 0.18em; margin-top: 2px; }
 .nav ul a:hover { color: var(--orange); opacity: 1; }
 .nav .cta-btn {
-  padding: 10px 18px; background: var(--orange); color: var(--steel);
-  font-weight: 700; letter-spacing: 0.18em;
+  padding: 9px 16px; background: var(--orange); color: var(--steel);
+  font-weight: 700; letter-spacing: 0.18em; border-radius: 8px;
   transition: background .2s ease;
+  display: inline-flex; align-items: center; gap: 8px;
 }
 .nav .cta-btn:hover { background: var(--orange-2); }
-@media (max-width: 800px) { .nav ul { display: none; } .nav { padding: 16px 20px; } }
+@media (max-width: 900px) {
+  .nav ul { display: none; }
+  .nav { padding: 10px 14px; gap: 14px; top: 12px; }
+}
 
 /* ─────────────────────── SMOOTH WRAPPER ─────────────────────── */
 #smooth-wrapper { position: fixed; inset: 0; overflow: hidden; }
@@ -128,7 +142,7 @@ section { position: relative; overflow: hidden; }
 
 /* ─────────────────────── HERO ─────────────────────── */
 .hero { height: 100vh; min-height: 720px; background: var(--steel); }
-.hero .bg { position: absolute; inset: 0; z-index: 0; will-change: transform; }
+.hero .bg { position: absolute; inset: 0; z-index: 0; will-change: transform; overflow: hidden; }
 .hero .bg video {
   position: absolute; inset: 0;
   width: 100%; height: 110%; object-fit: cover;
@@ -147,32 +161,43 @@ section { position: relative; overflow: hidden; }
   display: flex; flex-direction: column; justify-content: center;
 }
 .hero .label-row {
-  display: flex; align-items: center; gap: 16px; margin-bottom: 28px;
+  display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
   font-family: 'IBM Plex Mono', monospace; font-size: 11px;
   letter-spacing: 0.3em; text-transform: uppercase; color: var(--orange);
+  flex-wrap: wrap;
 }
 .hero .label-row .dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; }
 .hero .label-row .line { flex: 0 0 60px; height: 1px; background: var(--orange); }
+.hero .label-row .en {
+  color: var(--concrete-2); opacity: 0.7;
+  padding-left: 16px; border-left: 1px solid var(--rule);
+}
+/* #7 KINETIC DISPLAY TYPOGRAPHY */
 .hero h1 {
   font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
   font-size: clamp(54px, 11vw, 200px); line-height: 0.88;
   letter-spacing: 0.005em; text-transform: uppercase; color: var(--white);
-  margin-bottom: 24px; max-width: 1100px;
+  margin-bottom: 8px; max-width: 1100px;
 }
 .hero h1 em { font-style: normal; color: var(--orange); }
+.hero .h1-en {
+  font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--concrete-2); margin-bottom: 28px; opacity: 0.7;
+}
 .hero .sub {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: clamp(13px, 1.3vw, 18px); letter-spacing: 0.2em;
+  font-size: clamp(12px, 1.2vw, 16px); letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--concrete-2);
-  margin-bottom: 56px;
-  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  margin-bottom: 48px;
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
 }
-.hero .sub span.sep { width: 6px; height: 6px; background: var(--orange); display: inline-block; }
+.hero .sub span.sep { width: 6px; height: 6px; background: var(--orange); display: inline-block; flex-shrink: 0; }
 .hero .actions { display: flex; gap: 18px; flex-wrap: wrap; }
 .btn-primary, .btn-ghost {
   position: relative; display: inline-flex; align-items: center; gap: 14px;
-  padding: 20px 32px; font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700; font-size: 14px; letter-spacing: 0.22em;
+  padding: 18px 28px; font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 13px; letter-spacing: 0.22em;
   text-transform: uppercase;
   transition: background .25s ease, color .25s ease, border-color .25s ease;
   overflow: hidden; will-change: transform;
@@ -187,14 +212,15 @@ section { position: relative; overflow: hidden; }
   border: solid currentColor; border-width: 0 2px 2px 0; padding: 4px;
   transform: rotate(-45deg);
 }
+
 .hero .stats {
-  position: absolute; left: 6vw; right: 6vw; bottom: 60px; z-index: 5;
+  position: absolute; left: 6vw; right: 6vw; bottom: 50px; z-index: 5;
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 4vw;
-  padding-top: 28px; border-top: 1px solid var(--rule);
+  padding-top: 22px; border-top: 1px solid var(--rule);
 }
 .hero .stats .item .num {
   font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
-  font-size: clamp(46px, 6vw, 88px); line-height: 1; color: var(--white);
+  font-size: clamp(40px, 5.5vw, 80px); line-height: 1; color: var(--white);
   display: flex; align-items: baseline; gap: 6px;
   transform-origin: center center; will-change: transform;
 }
@@ -204,12 +230,13 @@ section { position: relative; overflow: hidden; }
   font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
   color: var(--concrete-2);
 }
+.hero .stats .item .lbl small { display: block; opacity: 0.55; font-size: 9px; margin-top: 2px; }
 @media (max-width: 720px) {
-  .hero .stats { grid-template-columns: repeat(3, 1fr); gap: 12px; bottom: 36px; }
-  .hero .stats .item .num { font-size: 32px; }
+  .hero .stats { gap: 12px; bottom: 30px; }
+  .hero .stats .item .num { font-size: 28px; }
 }
 .hero .scroll-cue {
-  position: absolute; right: 6vw; top: 50%; transform: translateY(-50%);
+  position: absolute; right: 5vw; top: 50%; transform: translateY(-50%);
   z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 12px;
   font-family: 'IBM Plex Mono', monospace; font-size: 10px;
   letter-spacing: 0.3em; text-transform: uppercase; color: var(--concrete-2);
@@ -228,8 +255,8 @@ section { position: relative; overflow: hidden; }
 @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
 @media (max-width: 768px) { .hero .scroll-cue { display: none; } }
 
-/* ─────────────────────── SERVICIOS ─────────────────────── */
-.servicios { background: var(--steel-2); color: var(--concrete); }
+/* ─────────────────────── SERVICIOS — sticky + slot machine ─────────────────────── */
+.servicios { background: var(--steel-2); color: var(--concrete); padding-top: 80px; }
 .servicios .wrap {
   display: grid; grid-template-columns: 380px 1fr;
   max-width: 1480px; margin: 0 auto;
@@ -246,23 +273,51 @@ section { position: relative; overflow: hidden; }
 }
 .servicios .left .num::before { content: ""; width: 36px; height: 1px; background: var(--orange); }
 .servicios .left h2 {
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
   font-size: clamp(46px, 5.5vw, 80px); line-height: 0.95;
   letter-spacing: 0.005em; text-transform: uppercase;
-  color: var(--white); margin-bottom: 28px;
+  color: var(--white); margin-bottom: 8px;
 }
 .servicios .left h2 em { font-style: normal; color: var(--orange); }
-.servicios .left p { max-width: 320px; font-size: 14px; color: var(--concrete-2); line-height: 1.65; margin-bottom: 36px; }
-.servicios .left .dots { display: flex; flex-direction: column; gap: 16px; }
+.servicios .left .h2-en {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.25em; text-transform: uppercase; color: var(--concrete-2);
+  opacity: 0.65; margin-bottom: 26px;
+}
+.servicios .left p { max-width: 320px; font-size: 14px; color: var(--concrete-2); line-height: 1.7; margin-bottom: 36px; }
+.servicios .left .nav-row {
+  display: flex; align-items: center; gap: 18px; margin-bottom: 28px;
+}
+/* #15 SLOT-MACHINE NUMBER */
+.slot {
+  display: inline-block; height: 64px; overflow: hidden;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 64px; line-height: 64px; color: var(--orange);
+  letter-spacing: -0.02em;
+}
+.slot .roll {
+  display: flex; flex-direction: column;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.slot .roll span { display: block; height: 64px; line-height: 64px; }
+.slot-meta {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--concrete-2);
+  border-left: 1px solid var(--rule); padding-left: 14px; line-height: 1.6;
+}
+.slot-meta strong { color: var(--white); display: block; font-size: 12px; font-weight: 500; }
+.servicios .left .dots { display: flex; flex-direction: column; gap: 14px; }
 .servicios .left .dots a {
-  display: flex; align-items: center; gap: 16px;
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
-  font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 14px;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+  font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--concrete-2); transition: color .25s ease;
 }
 .servicios .left .dots a .dot {
   width: 10px; height: 10px; border: 1.5px solid var(--concrete-2); border-radius: 50%;
   transition: background .25s ease, border-color .25s ease;
+  flex-shrink: 0;
 }
 .servicios .left .dots a.is-active { color: var(--white); }
 .servicios .left .dots a.is-active .dot { background: var(--orange); border-color: var(--orange); }
@@ -275,9 +330,7 @@ section { position: relative; overflow: hidden; }
   overflow: hidden; transition: border-color .3s ease;
 }
 .servicios .card.is-active { border-left: 3px solid var(--orange); }
-.servicios .card .img-side {
-  position: relative; overflow: hidden; min-height: 80vh;
-}
+.servicios .card .img-side { position: relative; overflow: hidden; min-height: 80vh; }
 .servicios .card .img-side video,
 .servicios .card .img-side img {
   position: absolute; inset: 0; width: 100%; height: 110%;
@@ -287,8 +340,8 @@ section { position: relative; overflow: hidden; }
 .servicios .card .img-side img {
   filter: brightness(0.65) contrast(1.05);
 }
-.servicios .card .img-side .v-pozos   { filter: brightness(0.6) contrast(1.1) grayscale(0.15); }
-.servicios .card .img-side .v-electric{ filter: brightness(0.55) contrast(1.15); }
+.servicios .card .img-side .v-edif    { filter: brightness(0.6)  contrast(1.1);  }
+.servicios .card .img-side .v-elect   { filter: brightness(0.55) contrast(1.15); }
 .servicios .card .img-side .vid-overlay {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(45deg, rgba(26,26,26,0.5) 0%, rgba(26,26,26,0.15) 60%);
@@ -306,21 +359,26 @@ section { position: relative; overflow: hidden; }
 .servicios .card .icon {
   width: 56px; height: 56px; border: 2px solid var(--orange);
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
   font-size: 22px; color: var(--orange); margin-bottom: 28px;
 }
 .servicios .card h3 {
   font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
   font-size: clamp(34px, 3.4vw, 52px); line-height: 0.95;
   letter-spacing: 0.005em; text-transform: uppercase;
-  color: var(--white); margin-bottom: 18px;
+  color: var(--white); margin-bottom: 6px;
+}
+.servicios .card .h3-en {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--concrete-2);
+  opacity: 0.65; margin-bottom: 18px;
 }
 .servicios .card .tag {
   font-family: 'IBM Plex Mono', monospace; font-size: 11px;
   letter-spacing: 0.25em; text-transform: uppercase;
   color: var(--orange); margin-bottom: 12px;
 }
-.servicios .card p { color: var(--concrete-2); font-size: 15px; line-height: 1.7; max-width: 420px; }
+.servicios .card p { color: var(--concrete-2); font-size: 15px; line-height: 1.7; max-width: 460px; }
 .servicios .card .features {
   margin-top: 28px; display: flex; flex-direction: column; gap: 10px;
   font-size: 13px; color: var(--concrete-2);
@@ -330,7 +388,7 @@ section { position: relative; overflow: hidden; }
   padding-bottom: 10px; border-bottom: 1px solid var(--rule-2);
 }
 .servicios .card .features li::before {
-  content: "+"; color: var(--orange); font-weight: 800;
+  content: "+"; color: var(--orange); font-weight: 900;
   font-family: 'Barlow Condensed', sans-serif; font-size: 18px;
 }
 .servicios .card .index {
@@ -339,14 +397,14 @@ section { position: relative; overflow: hidden; }
 }
 @media (max-width: 980px) {
   .servicios .wrap { grid-template-columns: 1fr; }
-  .servicios .left { position: relative; height: auto; padding: 100px 6vw 40px; border-right: 0; }
+  .servicios .left { position: relative; height: auto; padding: 80px 6vw 40px; border-right: 0; border-bottom: 1px solid var(--rule); }
   .servicios .right { padding: 40px 6vw 80px; }
   .servicios .card { grid-template-columns: 1fr; min-height: auto; }
   .servicios .card .img-side { min-height: 320px; }
   .servicios .card .body { padding: 36px 28px; }
 }
 
-/* ─────────────────────── PROYECTOS ─────────────────────── */
+/* ─────────────────────── PROYECTOS — pinned horizontal gallery ─────────────────────── */
 .proyectos { background: var(--steel); color: var(--white); }
 .proyectos .pin { height: 100vh; min-height: 720px; overflow: hidden; position: relative; }
 .proyectos .head {
@@ -365,9 +423,15 @@ section { position: relative; overflow: hidden; }
   letter-spacing: 0.005em; text-transform: uppercase; max-width: 1200px;
 }
 .proyectos .head h2 em { font-style: normal; color: var(--orange); }
+.proyectos .head .h2-en {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.25em; text-transform: uppercase; color: var(--concrete-2);
+  opacity: 0.65; margin-top: 8px;
+}
 .proyectos .head .meta {
   font-family: 'IBM Plex Mono', monospace; font-size: 11px;
   color: var(--concrete-2); letter-spacing: 0.2em; text-transform: uppercase;
+  text-align: right;
 }
 .proyectos .track {
   position: absolute; top: 50%; left: 0; transform: translateY(-50%);
@@ -400,16 +464,20 @@ section { position: relative; overflow: hidden; }
 }
 .proyectos .pcard h3 {
   font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
-  font-size: clamp(28px, 2.8vw, 40px); line-height: 0.95;
+  font-size: clamp(26px, 2.6vw, 38px); line-height: 0.95;
   letter-spacing: 0.005em; text-transform: uppercase; color: var(--white);
   margin-bottom: 8px;
 }
 .proyectos .pcard .loc {
   font-family: 'IBM Plex Mono', monospace; font-size: 11px;
-  letter-spacing: 0.2em; text-transform: uppercase; color: var(--concrete-2);
-  display: flex; align-items: center; gap: 8px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--concrete-2);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
 }
 .proyectos .pcard .loc::before { content: "◉"; color: var(--orange); }
+.proyectos .pcard .meta {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; color: rgba(232,232,232,0.55); text-transform: uppercase;
+}
 .proyectos .pcard .index {
   position: absolute; top: 24px; right: 28px; z-index: 3;
   font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
@@ -441,7 +509,8 @@ section { position: relative; overflow: hidden; }
 /* ─────────────────────── NOSOTROS ─────────────────────── */
 .nosotros {
   min-height: 100vh; background: var(--steel); color: var(--concrete);
-  display: grid; grid-template-columns: 1fr 1fr; align-items: stretch;
+  display: grid; grid-template-columns: 45% 1fr; align-items: stretch;
+  position: relative;
 }
 .nosotros .img-col { position: relative; overflow: hidden; min-height: 100vh; }
 .nosotros .img-col img {
@@ -454,15 +523,19 @@ section { position: relative; overflow: hidden; }
   background: linear-gradient(135deg, rgba(255,106,0,0.15) 0%, transparent 60%);
 }
 .nosotros .img-col .stamp {
-  position: absolute; left: 28px; bottom: 28px; z-index: 3;
+  position: absolute; left: 28px; bottom: 90px; z-index: 3;
   font-family: 'IBM Plex Mono', monospace; font-size: 10px;
   letter-spacing: 0.3em; text-transform: uppercase; color: var(--white);
   border: 1px solid rgba(255,255,255,0.5); padding: 10px 14px;
 }
+.nosotros .img-col .stamp-2 {
+  position: absolute; left: 28px; bottom: 28px; z-index: 3;
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--orange);
+}
 .nosotros .text-col {
-  padding: 14vh 6vw;
+  padding: 14vh 6vw; position: relative;
   display: flex; flex-direction: column; justify-content: center;
-  position: relative;
 }
 .nosotros .text-col .num {
   font-family: 'IBM Plex Mono', monospace; font-size: 11px;
@@ -474,22 +547,37 @@ section { position: relative; overflow: hidden; }
   font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
   font-size: clamp(40px, 5vw, 78px); line-height: 0.95;
   letter-spacing: 0.005em; text-transform: uppercase;
-  color: var(--white); margin-bottom: 14px;
+  color: var(--white); margin-bottom: 6px;
 }
 .nosotros .text-col h2 em { font-style: normal; color: var(--orange); }
-.nosotros .text-col .tagline {
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
-  font-size: clamp(16px, 1.4vw, 20px); letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--orange); margin-bottom: 32px;
-  display: flex; align-items: center; gap: 12px;
+.nosotros .text-col .h2-en {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.25em; text-transform: uppercase; color: var(--concrete-2);
+  opacity: 0.65; margin-bottom: 28px;
 }
-.nosotros .text-col .tagline::before { content: ""; width: 36px; height: 2px; background: var(--orange); }
+.nosotros .text-col .tagline {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+  font-size: clamp(18px, 1.5vw, 22px); letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--orange); margin-bottom: 6px;
+  display: flex; align-items: center; gap: 14px;
+}
+.nosotros .text-col .tagline::before { content: ""; width: 40px; height: 2px; background: var(--orange); }
+.nosotros .text-col .tagline-en {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--concrete-2);
+  opacity: 0.6; margin-bottom: 36px; padding-left: 54px;
+}
 .nosotros .text-col .lines { display: flex; flex-direction: column; gap: 18px; }
-.nosotros .text-col .lines p { font-size: 16px; line-height: 1.75; color: var(--concrete-2); max-width: 540px; }
+.nosotros .text-col .lines p { font-size: 15px; line-height: 1.75; color: var(--concrete-2); max-width: 560px; }
 .nosotros .text-col .lines p strong { color: var(--white); font-weight: 600; }
+/* #3 SCROLL-DRIVEN WORD REVEAL */
+.nosotros .text-col .lines p .word {
+  display: inline-block; opacity: 0.18; transition: opacity 0.4s ease;
+  margin-right: 0.22em; will-change: opacity;
+}
 .nosotros .meta-grid {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 36px;
-  margin-top: 44px; max-width: 540px;
+  margin-top: 44px; max-width: 560px;
 }
 .nosotros .meta-grid .m { padding-top: 16px; border-top: 1px solid var(--rule); }
 .nosotros .meta-grid .m .k {
@@ -497,10 +585,25 @@ section { position: relative; overflow: hidden; }
   letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange);
 }
 .nosotros .meta-grid .m .v {
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-  font-size: 24px; color: var(--white); margin-top: 4px;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+  font-size: 22px; color: var(--white); margin-top: 4px;
   text-transform: uppercase; letter-spacing: 0.04em;
 }
+.nosotros .clients {
+  margin-top: 50px; padding-top: 26px; border-top: 1px solid var(--rule);
+  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+}
+.nosotros .clients .lab {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--orange);
+}
+.nosotros .clients .names {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--concrete-2);
+  display: flex; flex-wrap: wrap; gap: 6px 14px;
+}
+.nosotros .clients .names span { white-space: nowrap; }
+.nosotros .clients .names span + span::before { content: "·"; margin-right: 14px; color: var(--orange); }
 @media (max-width: 900px) {
   .nosotros { grid-template-columns: 1fr; }
   .nosotros .img-col { min-height: 360px; }
@@ -516,10 +619,8 @@ section { position: relative; overflow: hidden; }
 }
 .proceso::before {
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background-image:
-    linear-gradient(0deg, rgba(255,106,0,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,106,0,0.04) 1px, transparent 1px);
-  background-size: 80px 80px;
+  background-image: radial-gradient(circle, rgba(255,106,0,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 .proceso .container { max-width: 1480px; margin: 0 auto; padding: 0 6vw; position: relative; z-index: 2; }
 .proceso .head {
@@ -538,10 +639,19 @@ section { position: relative; overflow: hidden; }
   letter-spacing: 0.005em; text-transform: uppercase; max-width: 1100px;
 }
 .proceso .head h2 em { font-style: normal; color: var(--orange); }
-.proceso .head .meta {
+.proceso .head .h2-en {
   font-family: 'IBM Plex Mono', monospace; font-size: 11px;
-  letter-spacing: 0.2em; text-transform: uppercase; color: var(--concrete-2);
-  text-align: right; max-width: 280px; line-height: 1.7;
+  letter-spacing: 0.25em; text-transform: uppercase; color: var(--concrete-2);
+  opacity: 0.65; margin-top: 8px;
+}
+.proceso .head .meta {
+  font-family: 'IBM Plex Sans', sans-serif; font-size: 14px;
+  color: var(--concrete-2); line-height: 1.7;
+  text-align: right; max-width: 320px;
+}
+.proceso .head .meta small {
+  display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.6; margin-top: 6px;
 }
 .proceso .steps {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
@@ -561,13 +671,23 @@ section { position: relative; overflow: hidden; }
   transform-origin: left center; will-change: transform;
 }
 .proceso .step h3 {
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
-  font-size: clamp(20px, 1.7vw, 26px); letter-spacing: 0.05em;
-  text-transform: uppercase; color: var(--white); margin-bottom: 14px;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: clamp(20px, 1.8vw, 28px); letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--white); margin-bottom: 4px;
 }
-.proceso .step p { font-size: 14px; line-height: 1.65; color: var(--concrete-2); max-width: 240px; }
+.proceso .step .h3-en {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--concrete-2);
+  opacity: 0.65; margin-bottom: 14px;
+}
+.proceso .step p { font-size: 13px; line-height: 1.65; color: var(--concrete-2); max-width: 240px; }
+.proceso .step p .en {
+  display: block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em; opacity: 0.55; margin-top: 6px;
+  text-transform: uppercase;
+}
 .proceso .step .stamp {
-  margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--rule);
+  margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--rule);
   font-family: 'IBM Plex Mono', monospace; font-size: 10px;
   letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange);
 }
@@ -594,7 +714,7 @@ section { position: relative; overflow: hidden; }
 }
 .contacto .visual .frame .vid-overlay {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(180deg, rgba(255,106,0,0.0) 0%, rgba(255,106,0,0.4) 100%);
+  background: linear-gradient(180deg, rgba(255,106,0,0) 0%, rgba(255,106,0,0.4) 100%);
 }
 .contacto .visual .overlay {
   position: absolute; inset: 0; z-index: 5;
@@ -610,13 +730,20 @@ section { position: relative; overflow: hidden; }
   font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
   font-size: clamp(48px, 7.5vw, 140px); line-height: 0.92;
   letter-spacing: 0.005em; text-transform: uppercase;
-  color: var(--white); margin-bottom: 32px; max-width: 1200px;
+  color: var(--white); margin-bottom: 18px; max-width: 1200px;
 }
 .contacto .visual .overlay h2 em { font-style: normal; color: var(--orange); }
+.contacto .visual .overlay .h2-en {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--concrete);
+  opacity: 0.7; margin-bottom: 28px;
+}
 .contacto .visual .overlay .sub {
   font-family: 'IBM Plex Mono', monospace; font-size: 12px;
   letter-spacing: 0.25em; text-transform: uppercase; color: var(--concrete);
-  max-width: 540px;
+}
+.contacto .visual .overlay .sub small {
+  display: block; opacity: 0.55; font-size: 10px; margin-top: 4px;
 }
 .contacto .form-block {
   max-width: 1280px; margin: 0 auto; padding: 14vh 6vw 14vh;
@@ -634,7 +761,11 @@ section { position: relative; overflow: hidden; }
   letter-spacing: 0.005em; text-transform: uppercase;
   color: var(--white); margin-bottom: 28px;
 }
-.contacto .form-block .info p { font-size: 15px; color: var(--concrete-2); line-height: 1.7; margin-bottom: 36px; }
+.contacto .form-block .info h3 em { font-style: normal; color: var(--orange); }
+.contacto .form-block .info p {
+  font-size: 14px; color: var(--concrete-2); line-height: 1.7; margin-bottom: 36px;
+  max-width: 360px;
+}
 .contacto .form-block .info .contact-list { display: flex; flex-direction: column; gap: 18px; }
 .contacto .form-block .info .contact-list .row { padding-top: 16px; border-top: 1px solid var(--rule); }
 .contacto .form-block .info .contact-list .row .k {
@@ -642,26 +773,34 @@ section { position: relative; overflow: hidden; }
   letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange); margin-bottom: 6px;
 }
 .contacto .form-block .info .contact-list .row .v {
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
-  font-size: 22px; color: var(--white); letter-spacing: 0.04em;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+  font-size: 18px; color: var(--white); letter-spacing: 0.04em; line-height: 1.45;
 }
-form.cf { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.contacto .form-block .info .contact-list .row .v small {
+  display: block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; color: var(--concrete-2);
+  margin-top: 4px; text-transform: none;
+}
+form.cf { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
 form.cf .full { grid-column: 1 / -1; }
 form.cf .field { display: flex; flex-direction: column; gap: 8px; }
 form.cf label {
   font-family: 'IBM Plex Mono', monospace; font-size: 10px;
   letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange);
 }
+form.cf label small {
+  color: var(--concrete-2); opacity: 0.55; margin-left: 6px; font-size: 9px;
+}
 form.cf input, form.cf textarea, form.cf select {
   background: var(--steel-2); border: 1px solid var(--rule);
-  padding: 16px 18px; color: var(--white);
-  font-family: 'IBM Plex Sans', sans-serif; font-size: 15px;
+  padding: 14px 16px; color: var(--white);
+  font-family: 'IBM Plex Sans', sans-serif; font-size: 14px;
   outline: none; transition: border-color .25s ease, background .25s ease;
 }
 form.cf input:focus, form.cf textarea:focus, form.cf select:focus {
   border-color: var(--orange); background: var(--steel-3);
 }
-form.cf textarea { min-height: 130px; resize: vertical; font-family: 'IBM Plex Sans', sans-serif; }
+form.cf textarea { min-height: 120px; resize: vertical; font-family: 'IBM Plex Sans', sans-serif; }
 form.cf select {
   appearance: none; -webkit-appearance: none;
   background-image: linear-gradient(45deg, transparent 50%, var(--orange) 50%), linear-gradient(135deg, var(--orange) 50%, transparent 50%);
@@ -671,14 +810,15 @@ form.cf select {
 form.cf .submit-row { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
 form.cf .legal {
   font-family: 'IBM Plex Mono', monospace; font-size: 10px;
-  letter-spacing: 0.2em; text-transform: uppercase; color: var(--concrete-2);
-  max-width: 420px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--concrete-2);
+  max-width: 460px; line-height: 1.6;
 }
+form.cf .legal small { display: block; opacity: 0.55; }
 form.cf button[type="submit"] {
   display: inline-flex; align-items: center; gap: 14px;
-  padding: 22px 36px; background: var(--orange); color: var(--steel);
+  padding: 20px 32px; background: var(--orange); color: var(--steel);
   font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
-  font-size: 14px; letter-spacing: 0.22em; text-transform: uppercase;
+  font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase;
   border: 0; transition: background .25s ease, transform .15s ease;
 }
 form.cf button[type="submit"]:hover { background: var(--orange-2); }
@@ -689,7 +829,7 @@ form.cf button[type="submit"]:hover { background: var(--orange-2); }
 
 /* ─────────────────────── FOOTER ─────────────────────── */
 footer.foot {
-  background: var(--steel); color: var(--concrete-2);
+  background: #0D0D0D; color: var(--concrete-2);
   padding: 80px 6vw 32px;
   border-top: 1px solid var(--rule);
 }
@@ -705,24 +845,30 @@ footer.foot .brand .logo-big {
 }
 footer.foot .brand .logo-big .bar { width: 36px; height: 6px; background: var(--orange); display: inline-block; }
 footer.foot .brand .logo-big em { font-style: normal; color: var(--orange); }
-footer.foot .brand p { font-size: 14px; line-height: 1.65; max-width: 440px; }
+footer.foot .brand p { font-size: 14px; line-height: 1.65; max-width: 460px; }
+footer.foot .brand p small {
+  display: block; font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; color: var(--concrete-2);
+  opacity: 0.55; margin-top: 6px; text-transform: uppercase;
+}
 footer.foot h4 {
   font-family: 'IBM Plex Mono', monospace; font-size: 10px;
   letter-spacing: 0.3em; text-transform: uppercase; color: var(--orange);
   margin-bottom: 22px; font-weight: 500;
 }
+footer.foot h4 small { color: var(--concrete-2); opacity: 0.55; margin-left: 6px; }
 footer.foot ul { list-style: none; }
 footer.foot ul li {
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 500;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
   font-size: 16px; line-height: 2; letter-spacing: 0.06em;
 }
 footer.foot ul li a:hover { color: var(--orange); }
-footer.foot .socials { display: flex; gap: 12px; margin-top: 12px; }
+footer.foot .socials { display: flex; gap: 12px; margin-top: 16px; }
 footer.foot .socials a {
   width: 38px; height: 38px; border: 1px solid var(--rule);
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-  font-size: 14px; color: var(--concrete-2);
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+  font-size: 13px; color: var(--concrete-2);
   transition: background .2s ease, color .2s ease, border-color .2s ease;
 }
 footer.foot .socials a:hover { background: var(--orange); color: var(--steel); border-color: var(--orange); }
@@ -734,7 +880,7 @@ footer.foot .bottom {
 }
 @media (max-width: 800px) { footer.foot .top { grid-template-columns: 1fr 1fr; } }
 
-/* ─────────────────────── SCAN OVERLAY (idle) ─────────────────────── */
+/* ─────────────────────── #10C SCAN OVERLAY (idle) ─────────────────────── */
 .scan-overlay {
   position: absolute; inset: 0; pointer-events: none; z-index: 10;
   opacity: 0;
@@ -764,56 +910,60 @@ footer.foot .bottom {
 <div class="cursor-ring" id="cursorRing"></div>
 <div class="cursor-dot"  id="cursorDot"></div>
 
-<!-- PROGRESS -->
+<!-- PROGRESS BAR -->
 <div class="progress" id="progress"></div>
 
-<!-- NAV -->
+<!-- ─── #6 FLOATING ISLAND NAV ─── -->
 <nav class="nav" id="nav">
   <div class="logo">
     <span class="bar"></span>
     <b>EQUIPO<em>·</em>1319</b>
   </div>
   <ul>
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#proyectos">Proyectos</a></li>
-    <li><a href="#nosotros">Nosotros</a></li>
-    <li><a href="#proceso">Proceso</a></li>
-    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#servicios">Servicios<small>Services</small></a></li>
+    <li><a href="#proyectos">Proyectos<small>Projects</small></a></li>
+    <li><a href="#nosotros">Nosotros<small>About</small></a></li>
+    <li><a href="#proceso">Proceso<small>Process</small></a></li>
+    <li><a href="#contacto">Contacto<small>Contact</small></a></li>
   </ul>
-  <a href="#contacto" class="cta-btn">Cotizar</a>
+  <a href="#contacto" class="cta-btn" data-magnetic>Cotizar / Quote <span class="btn-arrow"></span></a>
 </nav>
 
 <div id="smooth-wrapper">
   <div id="smooth-content">
 
-    <!-- ─── HERO ───────────────────────────────────────────────────── -->
+    <!-- ─── SECTION 01 — HERO ───────────────────────────────────────── -->
     <section class="hero" id="hero">
       <div class="bg">
         <video autoplay muted loop playsinline preload="auto"
                style="position:absolute;inset:0;width:100%;height:110%;object-fit:cover;transform:scale(1.15);will-change:transform;filter:brightness(0.35) contrast(1.1);"
-               id="heroVideo" aria-label="Grúas de construcción al amanecer">
-          <source src="gruas.mp4" type="video/mp4">
+               id="heroVideo" aria-label="Puente / estructura en construcción">
+          <source src="puente.mp4" type="video/mp4">
         </video>
       </div>
       <div class="overlay-grad"></div>
-      <div class="blueprint"></div>
+      <div class="dot-grid"></div>
       <div class="frame">
         <div class="label-row">
           <span class="line"></span>
-          <span>Sit. 01 / 06 — Carta de presentación 2026</span>
+          <span>Sit. 01 / 06 — Carta de Presentación 2026</span>
           <span class="dot"></span>
+          <span class="en">Engineering Portfolio · Caracas, VE</span>
         </div>
         <h1>
           Ingeniería<br/>
           que <em>mueve</em><br/>
           al mundo.
         </h1>
+        <div class="h1-en">Engineering that moves the world.</div>
         <div class="sub">
-          <span>Pozos petroleros</span>
+          <span>Obras Civiles</span>
           <span class="sep"></span>
-          <span>Sistemas eléctricos</span>
+          <span>Sistemas Eléctricos</span>
           <span class="sep"></span>
-          <span>Remodelación residencial &amp; comercial</span>
+          <span>Remodelación Comercial</span>
+          <span class="sep"></span>
+          <span>Infraestructura</span>
         </div>
         <div class="actions">
           <a href="#contacto" class="btn-primary" data-magnetic>Cotizar proyecto <span class="btn-arrow"></span></a>
@@ -827,65 +977,81 @@ footer.foot .bottom {
       <div class="stats">
         <div class="item">
           <div class="num"><em>+</em><span class="counter" data-target="50">0</span></div>
-          <div class="lbl">Proyectos completados</div>
+          <div class="lbl">Proyectos<small>Projects</small></div>
         </div>
         <div class="item">
-          <div class="num"><span class="counter" data-target="19">0</span></div>
-          <div class="lbl">Años de experiencia</div>
+          <div class="num"><em>+</em><span class="counter" data-target="20">0</span></div>
+          <div class="lbl">Años<small>Years</small></div>
         </div>
         <div class="item">
           <div class="num"><em>+</em><span class="counter" data-target="100">0</span></div>
-          <div class="lbl">Clientes satisfechos</div>
+          <div class="lbl">Clientes<small>Clients</small></div>
         </div>
       </div>
     </section>
 
-    <!-- ─── SERVICIOS ──────────────────────────────────────────────── -->
+    <!-- ─── SECTION 02 — SERVICIOS ──────────────────────────────────── -->
     <section class="servicios" id="servicios">
       <div class="wrap">
         <aside class="left">
-          <div class="num">02 — Servicios</div>
+          <div class="num">02 — Servicios / Services</div>
           <h2>Lo que <em>hacemos</em>.</h2>
-          <p>Cuatro disciplinas, un solo equipo. Desde la perforación de pozos petroleros hasta la remodelación de espacios residenciales y comerciales — ejecutadas con la misma precisión técnica.</p>
+          <div class="h2-en">What we do.</div>
+          <p>Más de 20 años ejecutando obras de ingeniería civil, eléctrica y remodelación para clientes corporativos en Venezuela y LATAM.</p>
+
+          <div class="nav-row">
+            <!-- #15 SLOT-MACHINE NUMBER -->
+            <div class="slot">
+              <div class="roll" id="slotRoll">
+                <span>01</span><span>02</span><span>03</span><span>04</span>
+              </div>
+            </div>
+            <div class="slot-meta">
+              <strong id="slotName">Edificios &amp; Estructuras</strong>
+              <span id="slotEn">Buildings &amp; Structures</span>
+            </div>
+          </div>
+
           <div class="dots" id="serviceDots">
-            <a href="#srv-1" data-i="0"><span class="dot"></span>01 · Pozos Petroleros</a>
-            <a href="#srv-2" data-i="1"><span class="dot"></span>02 · Sistemas Eléctricos</a>
-            <a href="#srv-3" data-i="2"><span class="dot"></span>03 · Remod. Residencial</a>
-            <a href="#srv-4" data-i="3"><span class="dot"></span>04 · Remod. Comercial</a>
+            <a href="#srv-1" data-i="0"><span class="dot"></span>Edificios &amp; Estructuras</a>
+            <a href="#srv-2" data-i="1"><span class="dot"></span>Sistemas Eléctricos &amp; Generación</a>
+            <a href="#srv-3" data-i="2"><span class="dot"></span>Obras Civiles &amp; Drenaje</a>
+            <a href="#srv-4" data-i="3"><span class="dot"></span>Remodelación Comercial</a>
           </div>
         </aside>
 
         <div class="right" id="serviceList">
 
-          <article class="card" id="srv-1" data-card="0">
+          <article class="card" id="srv-1" data-card="0" data-name="Edificios &amp; Estructuras" data-en="Buildings &amp; Structures">
             <div class="img-side">
-              <video autoplay muted loop playsinline preload="metadata" class="v-pozos"
+              <video autoplay muted loop playsinline preload="metadata" class="v-edif"
                      style="position:absolute;inset:0;width:100%;height:110%;object-fit:cover;transform:scale(1.15);will-change:transform;"
-                     aria-label="Bomba de extracción petrolera">
-                <source src="martillo_petrolero.mp4" type="video/mp4">
+                     aria-label="Estructura de edificio en construcción">
+                <source src="edificio.mp4" type="video/mp4">
               </video>
               <div class="vid-overlay"></div>
             </div>
             <div class="body">
               <div>
                 <div class="icon">01</div>
-                <div class="tag">Oil &amp; Gas</div>
-                <h3>Pozos<br/>Petroleros</h3>
-                <p>Diseño, perforación, intervención y mantenimiento de pozos. Servicios de workover, instalación de equipos de superficie y sistemas de bombeo para campos productores.</p>
+                <div class="tag">Structural Engineering</div>
+                <h3>Edificios &amp;<br/>Estructuras</h3>
+                <div class="h3-en">Buildings &amp; Structures</div>
+                <p>Construcción, rehabilitación y refuerzo de edificaciones comerciales e industriales. Desde diagnóstico estructural hasta entrega llave en mano, con experiencia probada en estructuras metálicas, losacero y obra civil en general.</p>
               </div>
               <ul class="features">
-                <li>Workover &amp; reacondicionamiento</li>
-                <li>Bombas balancín &amp; ESP</li>
-                <li>Instalaciones de superficie</li>
-                <li>Mantenimiento integral</li>
+                <li>Diagnóstico y patología estructural</li>
+                <li>Estructura metálica &amp; losacero</li>
+                <li>Obras de albañilería y acabados</li>
+                <li>Rampas, escaleras y accesos</li>
               </ul>
-              <div class="index">SCOPE / OG-001</div>
+              <div class="index">SCOPE / EC-001</div>
             </div>
           </article>
 
-          <article class="card" id="srv-2" data-card="1">
+          <article class="card" id="srv-2" data-card="1" data-name="Sistemas Eléctricos &amp; Generación" data-en="Electrical Systems &amp; Power Generation">
             <div class="img-side">
-              <video autoplay muted loop playsinline preload="metadata" class="v-electric"
+              <video autoplay muted loop playsinline preload="metadata" class="v-elect"
                      style="position:absolute;inset:0;width:100%;height:110%;object-fit:cover;transform:scale(1.15);will-change:transform;"
                      aria-label="Torre eléctrica de alta tensión">
                 <source src="antena_electrica.mp4" type="video/mp4">
@@ -895,24 +1061,25 @@ footer.foot .bottom {
             <div class="body">
               <div>
                 <div class="icon">02</div>
-                <div class="tag">Power &amp; Control</div>
-                <h3>Sistemas<br/>Eléctricos</h3>
-                <p>Diseño, suministro y construcción en alta, media y baja tensión. Subestaciones, plantas de emergencia, canalizaciones, tableros, automatización y sistemas solares.</p>
+                <div class="tag">Power &amp; Control Systems</div>
+                <h3>Sistemas Eléctricos<br/>&amp; Generación</h3>
+                <div class="h3-en">Electrical Systems &amp; Power Generation</div>
+                <p>Diseño, suministro e instalación de sistemas eléctricos de baja, media y alta tensión. Generadores desde 22 KVA hasta 375 KVA, subestaciones, tableros ATS, iluminación industrial y sistemas de tierra física.</p>
               </div>
               <ul class="features">
                 <li>Subestaciones BT / MT / AT</li>
-                <li>Generadores diésel y gas</li>
-                <li>Tableros y ATS</li>
-                <li>Iluminación industrial &amp; vial</li>
+                <li>Generadores diésel y gas (22–375 KVA)</li>
+                <li>Tableros de transferencia automática (ATS)</li>
+                <li>Iluminación industrial, portuaria y vial</li>
               </ul>
-              <div class="index">SCOPE / EE-002</div>
+              <div class="index">SCOPE / EL-002</div>
             </div>
           </article>
 
-          <article class="card" id="srv-3" data-card="2">
+          <article class="card" id="srv-3" data-card="2" data-name="Obras Civiles &amp; Drenaje" data-en="Civil Works &amp; Hydraulic Systems">
             <div class="img-side">
-              <img src="shane-mclendon-9jPJrfLTBi0-unsplash.jpg"
-                   alt="Excavadoras CAT en sitio de construcción"
+              <img src="jacob-padilla-YDm4MjUoEJE-unsplash.jpg"
+                   alt="Obras civiles e hidráulicas — concreto"
                    loading="lazy"
                    width="1400" height="900" />
               <div class="vid-overlay"></div>
@@ -920,24 +1087,25 @@ footer.foot .bottom {
             <div class="body">
               <div>
                 <div class="icon">03</div>
-                <div class="tag">Living Spaces</div>
-                <h3>Remodelación<br/>Residencial</h3>
-                <p>Rehabilitación integral de viviendas: albañilería, drywall, acabados de pared, techo y piso, instalaciones eléctricas y sanitarias, ampliaciones estructurales.</p>
+                <div class="tag">Civil Works &amp; Hydraulics</div>
+                <h3>Obras Civiles<br/>&amp; Drenaje</h3>
+                <div class="h3-en">Civil Works &amp; Hydraulic Systems</div>
+                <p>Construcción de muros de contención, patios de contenedores, puentes, canales pluviales, sistemas hidrosanitarios y obras civiles en general para sectores portuario, industrial y gubernamental.</p>
               </div>
               <ul class="features">
-                <li>Diseño + ejecución llave en mano</li>
-                <li>Estructura y ampliaciones</li>
-                <li>Acabados premium</li>
-                <li>Instalaciones eléctricas / sanitarias</li>
+                <li>Muros de contención y fundaciones</li>
+                <li>Sistemas pluviales y sanitarios</li>
+                <li>Patios de contenedores y pavimentación</li>
+                <li>Proyectos de ingeniería de detalle</li>
               </ul>
-              <div class="index">SCOPE / RR-003</div>
+              <div class="index">SCOPE / CI-003</div>
             </div>
           </article>
 
-          <article class="card" id="srv-4" data-card="3">
+          <article class="card" id="srv-4" data-card="3" data-name="Remodelación Comercial" data-en="Commercial &amp; Industrial Renovation">
             <div class="img-side">
               <img src="scott-blake-x-ghf9LjrVg-unsplash.jpg"
-                   alt="Equipo de ingeniería sobre losa de concreto"
+                   alt="Equipo en obra civil — losa de concreto"
                    loading="lazy"
                    width="1400" height="900" />
               <div class="vid-overlay"></div>
@@ -945,15 +1113,16 @@ footer.foot .bottom {
             <div class="body">
               <div>
                 <div class="icon">04</div>
-                <div class="tag">Retail &amp; Industry</div>
+                <div class="tag">Commercial Renovation</div>
                 <h3>Remodelación<br/>Comercial</h3>
-                <p>Rehabilitación y construcción de salas de venta, locales y galpones. Demoliciones, fundaciones, estructura metálica, sistemas de respaldo, voz y data.</p>
+                <div class="h3-en">Commercial &amp; Industrial Renovation</div>
+                <p>Rehabilitación integral de salas de venta, supermercados, oficinas y plantas industriales. Demoliciones, drywall, instalaciones eléctricas, sanitarias, voz &amp; data, CCTV y sistemas de respaldo energético.</p>
               </div>
               <ul class="features">
-                <li>Salas de venta &amp; supermercados</li>
-                <li>Estructura metálica &amp; losacero</li>
-                <li>Sistemas de respaldo eléctrico</li>
-                <li>Voz, data &amp; CCTV</li>
+                <li>Salas de venta &amp; supermercados (Central Madeirense)</li>
+                <li>Instalaciones eléctricas, sanitarias, voz &amp; data</li>
+                <li>Sistemas de respaldo: generadores + ATS</li>
+                <li>Climatización &amp; aire acondicionado</li>
               </ul>
               <div class="index">SCOPE / RC-004</div>
             </div>
@@ -963,217 +1132,271 @@ footer.foot .bottom {
       </div>
     </section>
 
-    <!-- ─── PROYECTOS ──────────────────────────────────────────────── -->
+    <!-- ─── SECTION 03 — PROYECTOS ──────────────────────────────────── -->
     <section class="proyectos" id="proyectos">
       <div class="pin">
         <div class="head">
           <div>
-            <div class="num">03 — Proyectos</div>
+            <div class="num">03 — Proyectos / Projects</div>
             <h2>Proyectos que <em>hablan</em><br/>por sí solos.</h2>
+            <div class="h2-en">Our work speaks for itself.</div>
           </div>
-          <div class="meta">2006 — 2025<br/>Venezuela &amp; LATAM</div>
+          <div class="meta">2003 — 2025<br/>Venezuela</div>
         </div>
 
         <div class="track" id="projTrack">
           <article class="pcard">
             <video autoplay muted loop playsinline preload="metadata"
                    style="position:absolute;inset:0;width:100%;height:110%;object-fit:cover;transform:scale(1.1);will-change:transform;"
-                   aria-label="Grúas al atardecer">
-              <source src="gruas.mp4" type="video/mp4">
+                   aria-label="Puente / muro de contención">
+              <source src="puente.mp4" type="video/mp4">
             </video>
             <div class="index">01</div>
             <div class="info">
-              <span class="tag">Construcción</span>
-              <h3>Grúas Atardecer<br/>Edificación Mayor</h3>
-              <div class="loc">Caracas · 2024</div>
+              <span class="tag">Obra Civil</span>
+              <h3>Muro de Contención</h3>
+              <div class="loc">Cumbre de Curumo · Caracas</div>
+              <div class="meta">OPPPE · 2018</div>
             </div>
           </article>
 
           <article class="pcard">
             <video autoplay muted loop playsinline preload="metadata"
                    style="position:absolute;inset:0;width:100%;height:110%;object-fit:cover;transform:scale(1.1);will-change:transform;"
-                   aria-label="Bomba balancín en campo petrolero">
-              <source src="martillo_petrolero.mp4" type="video/mp4">
+                   aria-label="Excavadora en sitio">
+              <source src="excavadora.mp4" type="video/mp4">
             </video>
             <div class="index">02</div>
             <div class="info">
-              <span class="tag">Oil &amp; Gas</span>
-              <h3>Workover Campo<br/>Productor</h3>
-              <div class="loc">Anzoátegui · 2024</div>
+              <span class="tag">Infraestructura Portuaria</span>
+              <h3>Patio de Contenedores</h3>
+              <div class="loc">Base Naval · Puerto Cabello</div>
+              <div class="meta">OCAMAR / Global Shipping · 2013–2014</div>
             </div>
           </article>
 
           <article class="pcard">
             <video autoplay muted loop playsinline preload="metadata"
                    style="position:absolute;inset:0;width:100%;height:110%;object-fit:cover;transform:scale(1.1);will-change:transform;"
-                   aria-label="Línea eléctrica de alta tensión">
-              <source src="antena_electrica.mp4" type="video/mp4">
+                   aria-label="Edificio en construcción">
+              <source src="edificio.mp4" type="video/mp4">
             </video>
             <div class="index">03</div>
             <div class="info">
-              <span class="tag">Eléctrico</span>
-              <h3>Red Alta<br/>Tensión</h3>
-              <div class="loc">Carabobo · 2023</div>
+              <span class="tag">Remodelación Comercial</span>
+              <h3>Central Madeirense<br/>Red Nacional</h3>
+              <div class="loc">Caracas · Distrito Capital</div>
+              <div class="meta">Central Madeirense C.A. · 2021–2025</div>
             </div>
           </article>
 
           <article class="pcard">
-            <img src="scott-blake-x-ghf9LjrVg-unsplash.jpg" alt="Equipo en obra civil" loading="lazy" width="1400" height="900" />
+            <img src="scott-blake-x-ghf9LjrVg-unsplash.jpg" alt="Sistema eléctrico industrial" loading="lazy" width="1400" height="900" />
             <div class="index">04</div>
             <div class="info">
-              <span class="tag">Obra Civil</span>
-              <h3>Ingenieros<br/>en Sitio</h3>
-              <div class="loc">Caracas · 2023</div>
+              <span class="tag">Sistemas Eléctricos</span>
+              <h3>Reubicación<br/>Chiller 200T</h3>
+              <div class="loc">Intercaps · Caracas</div>
+              <div class="meta">Industrias Intercaps · 2020</div>
             </div>
           </article>
 
           <article class="pcard">
-            <img src="shane-mclendon-9jPJrfLTBi0-unsplash.jpg" alt="Excavadoras en sitio" loading="lazy" width="1400" height="900" />
+            <img src="shane-mclendon-9jPJrfLTBi0-unsplash.jpg" alt="Excavadoras en infraestructura portuaria" loading="lazy" width="1400" height="900" />
             <div class="index">05</div>
             <div class="info">
-              <span class="tag">Excavación</span>
-              <h3>Movimiento<br/>de Tierra</h3>
-              <div class="loc">Monagas · 2022</div>
+              <span class="tag">Infraestructura Portuaria</span>
+              <h3>Rehabilitación<br/>Bolipuertos 7A</h3>
+              <div class="loc">Puerto Cabello · Carabobo</div>
+              <div class="meta">Alianza Cosco / Bolipuertos · 2018</div>
             </div>
           </article>
         </div>
 
         <div class="footer-note">
-          <span>Desliza hacia abajo</span>
+          <span>Desliza horizontalmente</span>
           <span class="arrow"></span>
         </div>
       </div>
     </section>
 
-    <!-- ─── NOSOTROS ───────────────────────────────────────────────── -->
+    <!-- ─── SECTION 04 — NOSOTROS ───────────────────────────────────── -->
     <section class="nosotros" id="nosotros">
       <div class="img-col">
         <img id="aboutImg"
              src="scott-blake-x-ghf9LjrVg-unsplash.jpg"
-             alt="Equipo de ingeniería — vista aérea"
+             alt="Equipo de ingeniería"
              loading="lazy"
              width="1400" height="1600" />
-        <div class="blueprint dark"></div>
-        <div class="stamp">EST. 2006 · Caracas, VE</div>
+        <div class="dot-grid dense"></div>
+        <div class="topo-texture"></div>
+        <div class="stamp">EST. 2003 · CARACAS, VE</div>
+        <div class="stamp-2">CIV · COVENIN · HSE</div>
       </div>
       <div class="text-col">
-        <div class="num">04 — Nosotros</div>
+        <div class="num">04 — Nosotros / About</div>
         <h2>Equipo<br/><em>1319</em></h2>
+        <div class="h2-en">About the team.</div>
         <div class="tagline">Desde las bases hasta la cima</div>
+        <div class="tagline-en">From the ground up.</div>
+
         <div class="lines">
-          <p class="ln"><strong>Somos una empresa venezolana</strong> de ingeniería y construcción con casi dos décadas en el ramo. Operamos en oil &amp; gas, sistemas eléctricos de potencia y obra civil para clientes residenciales, comerciales e industriales.</p>
-          <p class="ln">Combinamos personal altamente calificado, equipo de vanguardia y procesos auditables para entregar obras seguras, dentro del cronograma y con la calidad que cada proyecto exige.</p>
-          <p class="ln"><strong>Nuestra promesa</strong> es simple: ejecutar lo que se planificó, comunicar lo que ocurre y entregar lo que se prometió.</p>
+          <p class="ln"><strong>Somos una empresa venezolana</strong> de ingeniería civil, eléctrica y construcción fundada por Eduardo Silvestri Malavé. Con más de 20 años de experiencia ejecutando proyectos en Venezuela para clientes corporativos, industriales y gubernamentales.</p>
+          <p class="ln">Nuestra cartera incluye obras para Central Madeirense, Industrias Intercaps, Bolipuertos, la Armada Nacional, Venevisión, RCTV y el sector privado en general. Cada proyecto es tratado con la misma rigurosidad técnica y compromiso con la seguridad.</p>
+          <p class="ln"><strong>Cumplimos con todas las políticas</strong> de seguridad y calidad desde el inicio de cada obra, garantizando costos competitivos y relaciones a largo plazo con nuestros clientes.</p>
         </div>
+
         <div class="meta-grid">
-          <div class="m"><div class="k">Fundación</div><div class="v">2006</div></div>
-          <div class="m"><div class="k">Cobertura</div><div class="v">Nacional</div></div>
-          <div class="m"><div class="k">Disciplinas</div><div class="v">04 Áreas</div></div>
-          <div class="m"><div class="k">Certificación</div><div class="v">HSE / ISO</div></div>
+          <div class="m"><div class="k">Fundación / Founded</div><div class="v">2003</div></div>
+          <div class="m"><div class="k">Cobertura / Coverage</div><div class="v">VE &amp; LATAM</div></div>
+          <div class="m"><div class="k">Disciplinas / Disciplines</div><div class="v">04 Áreas</div></div>
+          <div class="m"><div class="k">Estándares / Standards</div><div class="v">HSE · COVENIN · ISO</div></div>
+        </div>
+
+        <div class="clients">
+          <div class="lab">Clientes / Clients</div>
+          <div class="names">
+            <span>Central Madeirense</span><span>Intercaps</span><span>Bolipuertos</span><span>Armada Nacional</span><span>Venevisión</span><span>RCTV</span><span>Global Shipping</span><span>Automercados STA</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── PROCESO ────────────────────────────────────────────────── -->
+    <!-- ─── SECTION 05 — PROCESO ────────────────────────────────────── -->
     <section class="proceso" id="proceso">
       <div class="container">
         <div class="head">
           <div>
-            <div class="num">05 — Proceso</div>
+            <div class="num">05 — Proceso / Process</div>
             <h2>Cómo <em>trabajamos</em>.</h2>
+            <div class="h2-en">How we work.</div>
           </div>
-          <div class="meta">Cuatro fases, un solo equipo. Cada fase es auditable, medible y con entregables documentados.</div>
+          <div class="meta">Un proceso claro desde la primera llamada hasta el cierre del proyecto.<small>A clear process from first call to project handover.</small></div>
         </div>
         <div class="steps">
           <div class="step">
             <span class="n">01</span>
             <h3>Diagnóstico</h3>
-            <p>Visita técnica, levantamiento de información en sitio y evaluación del alcance. Identificamos riesgos, restricciones y oportunidades antes de cotizar.</p>
+            <div class="h3-en">Diagnosis</div>
+            <p>Visita técnica, evaluación de requerimientos y análisis de condiciones existentes.<span class="en">Site visit, scope analysis, existing conditions survey.</span></p>
             <div class="stamp">Día 1 — 5</div>
           </div>
           <div class="step">
             <span class="n">02</span>
             <h3>Planificación</h3>
-            <p>Ingeniería de detalle, cronograma maestro, presupuesto cerrado y plan de seguridad. Cada partida queda documentada antes de ejecutar.</p>
+            <div class="h3-en">Planning</div>
+            <p>Ingeniería básica y de detalle, presupuesto, cronograma y propuesta técnica formal.<span class="en">Engineering design, budget, schedule, formal proposal.</span></p>
             <div class="stamp">Día 5 — 14</div>
           </div>
           <div class="step">
             <span class="n">03</span>
             <h3>Ejecución</h3>
-            <p>Movilización de equipo y personal calificado. Reportes semanales con avance físico-financiero, control de calidad y comunicación directa con el cliente.</p>
+            <div class="h3-en">Execution</div>
+            <p>Construcción o instalación con personal propio, equipos propios y supervisión HSE permanente.<span class="en">Construction with own crew, equipment, HSE supervision.</span></p>
             <div class="stamp">Variable</div>
           </div>
           <div class="step">
             <span class="n">04</span>
-            <h3>Entrega</h3>
-            <p>Pruebas, puesta en marcha, dossier técnico y capacitación al equipo del cliente. Garantía documentada y soporte post-entrega.</p>
+            <h3>Entrega &amp; Garantía</h3>
+            <div class="h3-en">Handover</div>
+            <p>Cierre técnico, dossier de obra, protocolo de pruebas y garantía post-entrega de 12 meses.<span class="en">Close-out, as-built dossier, testing, 12-month warranty.</span></p>
             <div class="stamp">Cierre + 12m</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── CONTACTO / CTA ─────────────────────────────────────────── -->
+    <!-- ─── SECTION 06 — CONTACTO ───────────────────────────────────── -->
     <section class="contacto" id="contacto">
       <div class="visual">
         <div class="frame" id="ctaFrame">
           <video autoplay muted loop playsinline preload="metadata"
                  style="position:absolute;inset:0;width:100%;height:110%;object-fit:cover;transform:scale(1.15);will-change:transform;filter:brightness(0.5) contrast(1.05);"
-                 aria-label="Grúas al atardecer">
-            <source src="gruas.mp4" type="video/mp4">
+                 aria-label="Puente / construcción">
+            <source src="puente.mp4" type="video/mp4">
           </video>
           <div class="vid-overlay"></div>
         </div>
         <div class="overlay">
-          <div class="num">06 — Contacto</div>
+          <div class="num">06 — Contacto / Contact</div>
           <h2>¿Listo para tu<br/><em>próximo</em> proyecto?</h2>
-          <div class="sub">Cuéntanos qué necesitas. Respondemos en menos de 24 horas hábiles.</div>
+          <div class="h2-en">Ready for your next project?</div>
+          <div class="sub">Respondemos en menos de 24 horas.<small>We respond in under 24 hours.</small></div>
         </div>
       </div>
 
       <div class="form-block">
         <div class="info">
-          <div class="num">Hablemos</div>
-          <h3>Cotización<br/>en 24h.</h3>
+          <div class="num">Hablemos / Let's Talk</div>
+          <h3>Cotización<br/>en <em>24h</em>.</h3>
           <p>Diligencia el formulario o contáctanos directamente. Atendemos solicitudes en toda Venezuela y proyectos especiales en LATAM.</p>
           <div class="contact-list">
-            <div class="row"><div class="k">Email</div><div class="v">equipol319@gmail.com</div></div>
-            <div class="row"><div class="k">Teléfonos</div><div class="v">0212 · 710 · 8619<br/>0424 · 218 · 0847<br/>0412 · 276 · 1418</div></div>
-            <div class="row"><div class="k">Dirección</div><div class="v">Av. Principal de San Luis,<br/>Torre Mayupan, Piso 2 · Caracas</div></div>
+            <div class="row">
+              <div class="k">Email</div>
+              <div class="v">equipol319@gmail.com</div>
+            </div>
+            <div class="row">
+              <div class="k">Teléfonos / Phone</div>
+              <div class="v">
+                0212 · 710 · 8619<br/>
+                0424 · 218 · 0847<br/>
+                0412 · 276 · 1418<br/>
+                0414 · 284 · 5923
+              </div>
+            </div>
+            <div class="row">
+              <div class="k">Dirección / Address</div>
+              <div class="v">
+                Av. Principal de San Luis,<br/>
+                Torre Mayupan, Piso 2 · Of. 2-04
+                <small>Urb. San Luis — El Cafetal · Municipio Baruta · Caracas 1061</small>
+              </div>
+            </div>
+            <div class="row">
+              <div class="k">Web / IG</div>
+              <div class="v">
+                www.equipo1319.com
+                <small>@equipo1319</small>
+              </div>
+            </div>
           </div>
         </div>
 
         <form class="cf" onsubmit="handleSubmit(event)">
           <div class="field">
-            <label for="f-name">Nombre completo</label>
+            <label for="f-name">Nombre completo<small>Full name</small></label>
             <input id="f-name" type="text" required placeholder="Juan Pérez" />
           </div>
           <div class="field">
-            <label for="f-email">Correo electrónico</label>
+            <label for="f-email">Correo electrónico<small>Email</small></label>
             <input id="f-email" type="email" required placeholder="juan@empresa.com" />
           </div>
           <div class="field">
-            <label for="f-phone">Teléfono</label>
+            <label for="f-phone">Teléfono<small>Phone</small></label>
             <input id="f-phone" type="tel" required placeholder="0414-000-0000" />
           </div>
           <div class="field">
-            <label for="f-srv">Servicio de interés</label>
+            <label for="f-comp">Empresa<small>Company</small></label>
+            <input id="f-comp" type="text" placeholder="(opcional / optional)" />
+          </div>
+          <div class="field full">
+            <label for="f-srv">Servicio<small>Service</small></label>
             <select id="f-srv" required>
-              <option value="">Selecciona un servicio…</option>
-              <option>Pozos Petroleros</option>
-              <option>Sistemas Eléctricos</option>
-              <option>Remodelación Residencial</option>
-              <option>Remodelación Comercial</option>
-              <option>Otro</option>
+              <option value="">Selecciona un servicio… / Select a service…</option>
+              <option>Edificios &amp; Estructuras / Buildings &amp; Structures</option>
+              <option>Sistemas Eléctricos &amp; Generación / Electrical Systems</option>
+              <option>Obras Civiles &amp; Drenaje / Civil Works</option>
+              <option>Remodelación Comercial / Commercial Renovation</option>
+              <option>Otro / Other</option>
             </select>
           </div>
           <div class="field full">
-            <label for="f-msg">Cuéntanos sobre tu proyecto</label>
-            <textarea id="f-msg" required placeholder="Alcance, ubicación, plazos…"></textarea>
+            <label for="f-msg">Mensaje<small>Message</small></label>
+            <textarea id="f-msg" required rows="4" placeholder="Alcance, ubicación, plazos / Scope, location, timeline…"></textarea>
           </div>
           <div class="submit-row">
-            <div class="legal">Al enviar aceptas nuestra política de privacidad. No compartimos información con terceros.</div>
-            <button type="submit" data-magnetic>Enviar solicitud <span class="btn-arrow"></span></button>
+            <div class="legal">Al enviar aceptas nuestra política de privacidad.<small>By submitting you accept our privacy policy.</small></div>
+            <button type="submit" data-magnetic>Enviar solicitud / Submit Request <span class="btn-arrow"></span></button>
           </div>
         </form>
       </div>
@@ -1187,46 +1410,45 @@ footer.foot .bottom {
             <span class="bar"></span>
             EQUIPO<em>·</em>1319
           </div>
-          <p>Ingeniería, construcción y mantenimiento industrial. Pozos petroleros, sistemas eléctricos y remodelación residencial &amp; comercial desde 2006.</p>
+          <p>Ingeniería civil, eléctrica y remodelación. Caracas, Venezuela.<small>Civil, electrical &amp; renovation engineering. Caracas, Venezuela.</small></p>
           <div class="socials">
-            <a href="#" aria-label="Instagram">IG</a>
-            <a href="#" aria-label="LinkedIn">IN</a>
-            <a href="#" aria-label="WhatsApp">WA</a>
-            <a href="#" aria-label="YouTube">YT</a>
+            <a href="https://instagram.com/equipo1319" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+            <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn">IN</a>
+            <a href="https://wa.me/584122761418" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+            <a href="https://www.equipo1319.com" target="_blank" rel="noopener" aria-label="Web">WB</a>
           </div>
         </div>
         <div>
-          <h4>Servicios</h4>
+          <h4>Servicios <small>Services</small></h4>
           <ul>
-            <li><a href="#srv-1">Pozos Petroleros</a></li>
+            <li><a href="#srv-1">Edificios &amp; Estructuras</a></li>
             <li><a href="#srv-2">Sistemas Eléctricos</a></li>
-            <li><a href="#srv-3">Remod. Residencial</a></li>
-            <li><a href="#srv-4">Remod. Comercial</a></li>
+            <li><a href="#srv-3">Obras Civiles</a></li>
+            <li><a href="#srv-4">Remodelación Comercial</a></li>
           </ul>
         </div>
         <div>
-          <h4>Compañía</h4>
+          <h4>Compañía <small>Company</small></h4>
           <ul>
             <li><a href="#nosotros">Nosotros</a></li>
-            <li><a href="#proyectos">Proyectos</a></li>
             <li><a href="#proceso">Proceso</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
             <li><a href="#contacto">Contacto</a></li>
           </ul>
         </div>
         <div>
-          <h4>Contacto</h4>
+          <h4>Contacto <small>Contact</small></h4>
           <ul>
-            <li>0212 · 710 · 8619</li>
-            <li>0424 · 218 · 0847</li>
-            <li>0412 · 276 · 1418</li>
             <li>equipol319@gmail.com</li>
+            <li>0212 · 710 · 8619</li>
+            <li>0412 · 276 · 1418</li>
+            <li>www.equipo1319.com</li>
           </ul>
         </div>
       </div>
       <div class="bottom">
-        <span>© 2026 Equipo 1319, C.A.</span>
+        <span>© 2026 C.A. Equipo 1319 · Caracas · Built with concrete &amp; steel.</span>
         <span>Caracas · Venezuela</span>
-        <span>Built with concrete &amp; steel</span>
       </div>
     </footer>
 
@@ -1235,7 +1457,7 @@ footer.foot .bottom {
 
 <script>
 /* =========================================================
-   EQUIPO 1319 — GSAP build with videos + idle animations
+   EQUIPO 1319 — bilingual cinematic build (terminal-industries inspired)
    ========================================================= */
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -1251,23 +1473,19 @@ if (!isMobile) {
     smooth: 1.2, effects: true, smoothTouch: 0.1, normalizeScroll: true
   });
 } else {
-  // release fixed wrapper for native mobile scroll
-  const w = document.getElementById('smooth-wrapper');
-  const c = document.getElementById('smooth-content');
-  if (w) w.style.cssText = 'position:static;overflow:visible';
-  if (c) c.style.transform = 'none';
+  document.getElementById('smooth-wrapper').style.cssText = 'position:static;overflow:visible';
+  const c = document.getElementById('smooth-content'); if (c) c.style.transform = 'none';
 }
 
-// ── ENSURE VIDEO AUTOPLAY (catch any iOS oddities) ──
+// ── ENSURE VIDEO AUTOPLAY (catches iOS quirks) ──
 document.querySelectorAll('video').forEach(v => {
-  v.muted = true;
-  v.playsInline = true;
+  v.muted = true; v.playsInline = true;
   const tryPlay = () => v.play().catch(() => {});
   tryPlay();
   v.addEventListener('canplay', tryPlay, { once: true });
 });
 
-// ── CUSTOM CURSOR ──
+// ── #12 CUSTOM CURSOR ──
 if (!isTablet) {
   const ring = document.getElementById('cursorRing');
   const dot  = document.getElementById('cursorDot');
@@ -1295,25 +1513,27 @@ ScrollTrigger.create({
   onUpdate: (s) => { document.getElementById('progress').style.width = (s.progress * 100) + '%'; }
 });
 
-// ── NAV solidify on scroll ──
+// ── #6 NAV solidify on scroll ──
 ScrollTrigger.create({
   start: 80, end: 'max',
   onEnter:    () => document.getElementById('nav').classList.add('scrolled'),
   onLeaveBack:() => document.getElementById('nav').classList.remove('scrolled')
 });
 
-// ── HERO entrance + parallax (video target) ──
+// ── HERO entrance + #13 PARALLAX ──
 const heroVideo = document.getElementById('heroVideo');
 const heroTl = gsap.timeline({ defaults: { ease: 'expo.out' } });
 heroTl
   .from(heroVideo,                { scale: 1.5, opacity: 0, duration: 1.6 })
   .from('.hero .label-row > *',   { y: 18, opacity: 0, duration: 0.6, stagger: 0.07 }, '-=1.0')
   .from('.hero h1',               { y: 80, opacity: 0, duration: 1.1 }, '-=0.8')
-  .from('.hero .sub > *',         { y: 18, opacity: 0, duration: 0.5, stagger: 0.05 }, '-=0.7')
+  .from('.hero .h1-en',           { y: 18, opacity: 0, duration: 0.6 }, '-=0.7')
+  .from('.hero .sub > *',         { y: 18, opacity: 0, duration: 0.5, stagger: 0.05 }, '-=0.6')
   .from('.hero .actions > *',     { y: 22, opacity: 0, duration: 0.6, stagger: 0.08 }, '-=0.5')
   .from('.hero .scroll-cue',      { opacity: 0, x: 20, duration: 0.7 }, '-=0.3')
   .from('.hero .stats .item',     { y: 40, opacity: 0, duration: 0.7, stagger: 0.1 }, '-=0.6');
 
+// HERO scroll parallax (video moves with scroll)
 gsap.to(heroVideo, {
   yPercent: isMobile ? 6 : 15, scale: 1.28, ease: 'none',
   scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
@@ -1322,7 +1542,7 @@ gsap.to('.hero .frame', {
   yPercent: -8, opacity: 0.3, ease: 'none',
   scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
 });
-gsap.to('.hero .blueprint', {
+gsap.to('.hero .dot-grid', {
   yPercent: -22, ease: 'none',
   scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
 });
@@ -1331,7 +1551,25 @@ gsap.to('.hero .stats', {
   scrollTrigger: { trigger: '.hero', start: 'center top', end: 'bottom top', scrub: 1.2 }
 });
 
-// ── STAT COUNTERS ──
+// ── #1 SCROLL-SEQUENCED VIDEO SCRUBBING (Hero) ──
+// Override the loop: scroll position drives currentTime through the hero section.
+let heroScrubReady = false;
+heroVideo.addEventListener('loadedmetadata', () => {
+  // pause autoplay so scroll fully drives playback
+  heroVideo.pause();
+  heroScrubReady = true;
+  ScrollTrigger.refresh();
+});
+ScrollTrigger.create({
+  trigger: '.hero',
+  start: 'top top', end: 'bottom top',
+  onUpdate: (self) => {
+    if (!heroScrubReady || !heroVideo.duration || isNaN(heroVideo.duration)) return;
+    heroVideo.currentTime = self.progress * heroVideo.duration;
+  }
+});
+
+// ── #14 ANIMATED STAT COUNTERS ──
 gsap.utils.toArray('.counter').forEach(el => {
   const target = parseInt(el.getAttribute('data-target'), 10);
   ScrollTrigger.create({
@@ -1346,9 +1584,26 @@ gsap.utils.toArray('.counter').forEach(el => {
   });
 });
 
-// ── SERVICIOS — per-card video/image parallax + active state ──
+// ── #2 STICKY SPLIT-PANEL — SERVICIOS active card + #15 SLOT-MACHINE ──
 const cards = gsap.utils.toArray('.servicios .card');
 const dots  = gsap.utils.toArray('#serviceDots a');
+const slotRoll = document.getElementById('slotRoll');
+const slotName = document.getElementById('slotName');
+const slotEn   = document.getElementById('slotEn');
+
+function activateCard(i) {
+  cards.forEach(c => c.classList.remove('is-active'));
+  dots.forEach(d => d.classList.remove('is-active'));
+  const card = cards[i]; const dot = dots[i];
+  if (!card) return;
+  card.classList.add('is-active');
+  if (dot) dot.classList.add('is-active');
+  // Slot machine roll
+  if (slotRoll) slotRoll.style.transform = `translateY(-${i * 64}px)`;
+  if (slotName) slotName.innerHTML = card.dataset.name;
+  if (slotEn)   slotEn.innerHTML   = card.dataset.en;
+}
+
 cards.forEach((card, i) => {
   const media = card.querySelector('.img-side video, .img-side img');
   if (media) {
@@ -1363,20 +1618,12 @@ cards.forEach((card, i) => {
   });
   ScrollTrigger.create({
     trigger: card, start: 'top 55%', end: 'bottom 45%',
-    onToggle: (s) => {
-      cards.forEach(c => c.classList.remove('is-active'));
-      dots.forEach(d => d.classList.remove('is-active'));
-      if (s.isActive) {
-        card.classList.add('is-active');
-        const d = dots[i]; if (d) d.classList.add('is-active');
-      }
-    }
+    onToggle: (s) => { if (s.isActive) activateCard(i); }
   });
 });
-if (cards[0]) cards[0].classList.add('is-active');
-if (dots[0])  dots[0].classList.add('is-active');
+activateCard(0);
 
-// ── PROYECTOS — pinned horizontal gallery ──
+// ── #4 PINNED HORIZONTAL SCROLL GALLERY (Proyectos) ──
 if (!isTablet) {
   const track = document.getElementById('projTrack');
   if (track) {
@@ -1397,19 +1644,67 @@ if (!isTablet) {
   }
 }
 
-// ── NOSOTROS — image parallax + line-by-line reveal ──
+// ── NOSOTROS — image parallax ──
 gsap.to('#aboutImg', {
   yPercent: isMobile ? -4 : -10, scale: 1.08, ease: 'none',
   scrollTrigger: { trigger: '.nosotros', start: 'top bottom', end: 'bottom top', scrub: 1.4 }
 });
 gsap.from('.nosotros .text-col .num,    \
            .nosotros .text-col h2,      \
+           .nosotros .text-col .h2-en,  \
            .nosotros .text-col .tagline,\
-           .nosotros .text-col .ln,     \
-           .nosotros .meta-grid .m', {
-  y: 40, opacity: 0, duration: 0.9, ease: 'expo.out', stagger: 0.1,
+           .nosotros .text-col .tagline-en, \
+           .nosotros .meta-grid .m,     \
+           .nosotros .clients', {
+  y: 40, opacity: 0, duration: 0.9, ease: 'expo.out', stagger: 0.08,
   scrollTrigger: { trigger: '.nosotros .text-col', start: 'top 75%' }
 });
+
+// ── #3 SCROLL-DRIVEN WORD REVEAL (Nosotros paragraphs) ──
+function wrapWordsInParagraphs() {
+  document.querySelectorAll('.nosotros .lines p.ln').forEach(p => {
+    const html = p.innerHTML;
+    // Skip if already wrapped
+    if (p.querySelector('.word')) return;
+    // Wrap each text node's words while preserving <strong> tags
+    const walk = (node) => {
+      const children = [...node.childNodes];
+      children.forEach(child => {
+        if (child.nodeType === 3) { // TEXT_NODE
+          const frag = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach(token => {
+            if (!token.trim()) frag.appendChild(document.createTextNode(token));
+            else {
+              const span = document.createElement('span');
+              span.className = 'word'; span.textContent = token;
+              frag.appendChild(span);
+            }
+          });
+          node.replaceChild(frag, child);
+        } else if (child.nodeType === 1) {
+          walk(child);
+        }
+      });
+    };
+    walk(p);
+  });
+}
+wrapWordsInParagraphs();
+
+const wordEls = [...document.querySelectorAll('.nosotros .lines .word')];
+function updateWordReveal() {
+  const vh = window.innerHeight;
+  wordEls.forEach(w => {
+    const r = w.getBoundingClientRect();
+    const center = r.top + r.height / 2;
+    // 0 at viewport bottom, 1 at viewport top
+    let p = 1 - (center / vh);
+    p = Math.max(0, Math.min(1, p));
+    // map 0..0.4 → 0.18, 0.4..0.7 → 0.18→1, 0.7+ → 1
+    const opacity = p < 0.4 ? 0.18 : (p < 0.7 ? 0.18 + (p - 0.4) * (0.82 / 0.3) : 1);
+    w.style.opacity = opacity.toFixed(2);
+  });
+}
 
 // ── PROCESO — staggered slide-up + number scale-in ──
 gsap.from('.proceso .head > div, .proceso .head .meta', {
@@ -1421,11 +1716,11 @@ gsap.from('.proceso .step', {
   scrollTrigger: { trigger: '.proceso .steps', start: 'top 80%' }
 });
 gsap.from('.proceso .step .n', {
-  scale: 0.4, duration: 1.2, ease: 'expo.out', stagger: 0.12,
+  scale: 0.4, duration: 1.2, ease: 'back.out(1.7)', stagger: 0.12,
   scrollTrigger: { trigger: '.proceso .steps', start: 'top 80%' }
 });
 
-// ── CONTACTO — frame scale + video parallax + reveals ──
+// ── #5 VIDEO FRAME EXPAND (Contacto CTA) ──
 ScrollTrigger.create({
   trigger: '.contacto .visual',
   start: 'top top+=10%', end: 'bottom top',
@@ -1442,7 +1737,7 @@ gsap.to('.contacto .visual .frame video', {
   scrollTrigger: { trigger: '.contacto .visual', start: 'top bottom', end: 'bottom top', scrub: 1.4 }
 });
 gsap.from('.contacto .visual .overlay > *', {
-  y: 50, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: 0.12,
+  y: 50, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: 0.1,
   scrollTrigger: { trigger: '.contacto .visual', start: 'top 65%' }
 });
 gsap.from('.contacto .form-block .info > *', {
@@ -1454,7 +1749,7 @@ gsap.from('form.cf .field, form.cf .submit-row', {
   scrollTrigger: { trigger: 'form.cf', start: 'top 85%' }
 });
 
-// ── MAGNETIC BUTTONS ──
+// ── #11 MAGNETIC BUTTONS ──
 document.querySelectorAll('[data-magnetic]').forEach(el => {
   const xq = gsap.quickTo(el, 'x', { duration: 0.4, ease: 'power3' });
   const yq = gsap.quickTo(el, 'y', { duration: 0.4, ease: 'power3' });
@@ -1477,7 +1772,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       const target = document.querySelector(id);
       if (target) {
         e.preventDefault();
-        if (smoother) smoother.scrollTo(target, true, 'top 60px');
+        if (smoother) smoother.scrollTo(target, true, 'top 80px');
         else target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
@@ -1485,7 +1780,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 
 // =====================================================
-// ── SCROLL IDLE ANIMATIONS (Float / Heartbeat / Scan) ──
+// ── #10 SCROLL IDLE ANIMATIONS (Float / Heartbeat / Scan) ──
 // =====================================================
 const idleIntensity   = isMobile ? 0.5 : 1.0;
 const floatTargets    = 'video, .nosotros .img-col img, .pcard img';
@@ -1494,15 +1789,14 @@ const scanContainers  = '.servicios .card .img-side, .proyectos .pcard, .hero .b
 
 let idleTween = null, heartbeatTween = null, scanOverlays = [], idleTimer = null;
 
-// A) Idle float — videos and images drift gently
+// 10A) Idle float
 function startIdleFloat() {
   if (idleTween) idleTween.kill();
   gsap.set(floatTargets, { y: 0, rotation: 0 });
   idleTween = gsap.to(floatTargets, {
     y: '+=' + (14 * idleIntensity),
     rotation: '+=' + (1.2 * idleIntensity),
-    duration: 2.6,
-    ease: 'sine.inOut',
+    duration: 2.6, ease: 'sine.inOut',
     yoyo: true, repeat: -1,
     stagger: { amount: 1, from: 'random' }
   });
@@ -1512,7 +1806,7 @@ function killIdleFloat() {
   gsap.set(floatTargets, { y: 0, rotation: 0 });
 }
 
-// B) Heartbeat — lub-dub pulse
+// 10B) Heartbeat
 function startHeartbeat() {
   if (heartbeatTween) heartbeatTween.kill();
   gsap.set(heartbeatTargets, { scale: 1 });
@@ -1529,7 +1823,7 @@ function killHeartbeat() {
   gsap.set(heartbeatTargets, { scale: 1 });
 }
 
-// C) Scan overlay — corner brackets + sweeping line
+// 10C) Scan overlay
 function showScanOverlays() {
   if (isMobile) return;
   document.querySelectorAll(scanContainers).forEach(container => {
@@ -1554,11 +1848,12 @@ function hideScanOverlays() {
   scanOverlays = [];
 }
 
-// Master scroll listener — kill, then restart 700ms after idle
+// Master scroll listener — kill idle effects, also drive word reveal
 function onScrollKickIdle() {
   killIdleFloat();
   killHeartbeat();
   hideScanOverlays();
+  updateWordReveal();
   clearTimeout(idleTimer);
   idleTimer = setTimeout(() => {
     startIdleFloat();
@@ -1571,10 +1866,12 @@ window.addEventListener('scroll',    onScrollKickIdle, { passive: true });
 window.addEventListener('wheel',     onScrollKickIdle, { passive: true });
 window.addEventListener('touchmove', onScrollKickIdle, { passive: true });
 ScrollTrigger.addEventListener('scrollStart', onScrollKickIdle);
+ScrollTrigger.addEventListener('refresh', updateWordReveal);
 
 // Kick off idle animations on initial load
 window.addEventListener('load', () => {
   setTimeout(() => {
+    updateWordReveal();
     startIdleFloat();
     startHeartbeat();
     showScanOverlays();
@@ -1587,10 +1884,10 @@ function handleSubmit(e) {
   const btn = e.target.querySelector('button[type="submit"]');
   if (!btn) return;
   const original = btn.innerHTML;
-  btn.innerHTML = 'Enviando…';
+  btn.innerHTML = 'Enviando… / Sending…';
   btn.style.background = 'var(--orange-2)';
   setTimeout(() => {
-    btn.innerHTML = '✔ Solicitud enviada';
+    btn.innerHTML = '✔ Solicitud enviada / Request sent';
     btn.style.background = '#3aa84a';
     e.target.reset();
     setTimeout(() => {
@@ -1601,12 +1898,15 @@ function handleSubmit(e) {
 }
 window.handleSubmit = handleSubmit;
 
-// ── REFRESH / DEBOUNCED RESIZE ──
+// ── REFRESH ON LOAD / DEBOUNCED RESIZE ──
 window.addEventListener('load', () => ScrollTrigger.refresh());
 let resizeT;
 window.addEventListener('resize', () => {
   clearTimeout(resizeT);
-  resizeT = setTimeout(() => ScrollTrigger.refresh(), 180);
+  resizeT = setTimeout(() => {
+    ScrollTrigger.refresh();
+    updateWordReveal();
+  }, 180);
 });
 </script>
 
